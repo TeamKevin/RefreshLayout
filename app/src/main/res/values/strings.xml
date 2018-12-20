@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RefreshLayout</string>
+
+    <string name="load_more">点击加载更多</string>
+    <string name="to_last">我是有底线的</string>
+    <string name="data_empty">暂无数据</string>
+    <string name="net_error">无网络连接，请检查您的网络...</string>
+    <string name="load_failed">加载失败，点击重试~~</string>
+    <string name="loading">加载中...</string>
+    <string name="now_loading">正在加载...</string>
+</resources>
