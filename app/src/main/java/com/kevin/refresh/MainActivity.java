@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnItemListener, S
         mRefreshRecyclerView = findViewById(R.id.refreshRecyclerView);
         RecyclerView recyclerView = mRefreshRecyclerView.getRecyclerView();
         mAdapter = new DataAdapter(recyclerView, mList, R.layout.item_data);
+        //添加分割线
         recyclerView.addItemDecoration(new BaseDividerItemDecoration(this, BaseDividerItemDecoration.VERTICAL_LIST, R.drawable.divider_gray_1));
         mRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRefreshRecyclerView.setAdapter(mAdapter);
@@ -48,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements OnItemListener, S
         for (int i = start; i < start + 10; i++) {
             mList.add("数据：" + i);
         }
-        mAdapter.notifyDataSetChanged();
+        //刷新完成后调用
         mRefreshRecyclerView.setRefreshComplete();
+        //网络断开后调用，显示断网界面
+//        mRefreshRecyclerView.showLoadError();
     }
 
     @Override

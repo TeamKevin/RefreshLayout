@@ -26,6 +26,7 @@ public class RefreshRecyclerView extends RelativeLayout implements View.OnClickL
     private TextView mLoadView;
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
+    private BaseRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private int mPageSize = 10;
     //是否是加载更多
@@ -70,9 +71,10 @@ public class RefreshRecyclerView extends RelativeLayout implements View.OnClickL
 
     /**
      * 获得当前RecyclerView对象
+     *
      * @return
      */
-    public RecyclerView getRecyclerView(){
+    public RecyclerView getRecyclerView() {
         return mRecyclerView;
     }
 
@@ -92,7 +94,7 @@ public class RefreshRecyclerView extends RelativeLayout implements View.OnClickL
      * @param adapter
      */
     public void setAdapter(BaseRecyclerAdapter adapter) {
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter( mAdapter = adapter);
         adapter.addFooterView(mFooterView);
     }
 
@@ -128,13 +130,14 @@ public class RefreshRecyclerView extends RelativeLayout implements View.OnClickL
      * 刷新完成
      */
     public void setRefreshComplete() {
+        mAdapter.notifyDataSetChanged();
         int itemCount = mLayoutManager.getItemCount() - 1;
         if (itemCount == 0) {
             mLoadLayout.setVisibility(GONE);
             mEndLayout.setVisibility(GONE);
             mErrorLayout.showEmpty();
             return;
-        }else{
+        } else {
             mErrorLayout.showContent();
             if (itemCount % mPageSize != 0) {
                 mLoadLayout.setVisibility(GONE);
